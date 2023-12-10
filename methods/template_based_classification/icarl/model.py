@@ -206,10 +206,16 @@ class Classifier(nn.Module):
         return 'classify'
 
 
-    def feature_extractor(self, images):
-        x = self.embedding_RNA(images)
-        x_output = self.transformer_encoder_RNA(x)  # [243, 128, 128]
-        x_output = x_output.view(x_output.shape[0], -1)
+    def feature_extractor(self, x):
+        x = self.embedding_RNA(x)
+        x = self.position_encode_RNA(x.permute(1, 0, 2))
+        x_output = self.transformer_encoder_RNA(x)
+        x_output, x_hn = self.gru_RNA(x_output)
+        x_output = x_output.permute(1, 0, 2)
+        x_hn = x_hn.permute(1, 0, 2)
+        x_output = x_output.reshape(x_output.shape[0], -1)
+        x_hn = x_hn.reshape(x_output.shape[0], -1)
+        x_output = torch.cat([x_output, x_hn], 1)
 
         return x_output
 
