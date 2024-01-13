@@ -21,7 +21,7 @@ def set_method_options(args, **kwargs):
         args.method = 'none'
 
 # store = "./store"
-store = ''
+store = 'store'
 def set_default_values(args, also_hyper_params=True, single_context=False, no_boundaries=False):
     # -set default-values for certain arguments based on chosen experiment
     args.scenario = 'class' if args.scenario is None else args.scenario
@@ -31,7 +31,7 @@ def set_default_values(args, also_hyper_params=True, single_context=False, no_bo
     args.seqlen = 41 if args.seqlen is None else args.seqlen
     args.step_interval = 100 if args.step_interval is None else args.step_interval
     args.data_dir = './store/datasets/' if args.data_dir is None else args.data_dir
-    args.r_dir = '{}/results/original/dgr'.format(store) if args.r_dir is None else args.r_dir
+    args.r_dir = '{}/results'.format(store) if args.r_dir is None else args.r_dir
     args.save = False if args.save is None else args.save
 
     args.verbose = True if args.verbose is None else args.verbose
