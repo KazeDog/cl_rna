@@ -47,11 +47,11 @@ def set_default_values(args, also_hyper_params=True, single_context=False, no_bo
 
     # -gating based on internal context (brain-inspired replay)
     if args.scenario == 'task' and hasattr(args, 'dg_prop'):
-        args.dg_prop = (0. if args.experiment == 'splitMNIST' else 0.) if args.dg_prop is None else args.dg_prop
+        args.dg_prop = 0.
     elif args.scenario == 'domain' and hasattr(args, 'dg_prop'):
-        args.dg_prop = (0.1 if args.experiment == 'splitMNIST' else 0.5) if args.dg_prop is None else args.dg_prop
+        args.dg_prop = 0.5
     elif args.scenario == 'class' and hasattr(args, 'dg_prop'):
-        args.dg_prop = (0.1 if args.experiment == 'splitMNIST' else 0.7) if args.dg_prop is None else args.dg_prop
+        args.dg_prop = 0.7
 
     if hasattr(args, 'budget'):
         args.budget = 0.05 if args.budget is None else args.budget
